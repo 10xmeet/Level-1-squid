@@ -628,24 +628,38 @@ ul li:last-child {
   margin-bottom: 1rem;
 }
 
-.actor-video {
-  border-radius: 0.6rem;
-  text-align: center;
-  position: relative;
-  background: url(../img/video-img.jpg) no-repeat center;
-  background-size: cover;
-  max-width: 77rem;
-  width: 100%;
-  height: 45.5rem;
-  margin: 0 auto 12.6rem;
-}
+  .actor-video {
+    border-radius: 0.6rem;
+    text-align: center;
+    position: relative;
+    background: url(../img/video-img.jpg) no-repeat center;
+    background-size: cover;
+    max-width: 77rem;
+    width: 100%;
+    height: 45.5rem;
+    margin: 0 auto 12.6rem;
+  }
 
 .actor-video iframe {
-  width: 80vw;
-  height: 100%;
-  max-width: 135rem;
-  object-fit: cover;
-}
+    width: 80vw;
+    height: 100%;
+    max-width: 135rem;
+    object-fit: cover;
+    transition: 0.5s;
+    transform: scale(0);
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  .actor-video iframe.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    visibility: visible;
+  }
 
 .actor-video::before {
   content: '';

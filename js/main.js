@@ -15,10 +15,10 @@ addEventListener('scroll', function () {
 });
 
 /* ========== Video PopUp =========== */
-const videoIframe = document.querySelector('.video');
-const button = document.querySelector('.video-control');
-const videoWrapper = document.querySelector('.video-wrapper');
-let player;
+const headerVideoWrapper = document.querySelector('.video-wrapper');
+const actorVideoContainer = document.querySelector('.actor-video');
+let headerPlayer;
+let actorPlayer;
 
 // Load YouTube API
 const tag = document.createElement('script');
@@ -28,14 +28,13 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 // Create YouTube player when API is ready
 function onYouTubeIframeAPIReady() {
-  player = new YT.Player('header-video', {
+  headerPlayer = new YT.Player('header-video', {
     events: {
       'onStateChange': onPlayerStateChange
     }
   });
   
-  // Create player for actor section video
-  new YT.Player('actor-video', {
+  actorPlayer = new YT.Player('actor-video', {
     events: {
       'onStateChange': onPlayerStateChange
     }
@@ -50,26 +49,50 @@ function onPlayerStateChange(event) {
   }
 }
 
-['.watch-button', '.actor-video'].forEach((el) => {
-  document.querySelector(el).onclick = () => {
-    videoWrapper.classList.add('active');
-  };
+document.querySelector('.watch-button').onclick = () => {
+  headerVideoWrapper.classList.add('active');
+};
+
+actorVideoContainer.addEventListener('click', () => {
+    actorVideoContainer.querySelector('iframe').classList.add('active');
+    actorPlayer.playVideo();
+  });
+
+document.addEventListener('click', (event) => {
+  const isClickInsideActorVideo = actorVideoContainer.contains(event.target);
+  const isActorVideoActive = actorVideoContainer.querySelector('iframe').classList.contains('active');
+
+  if (!isClickInsideActorVideo && isActorVideoActive) {
+    actorVideoContainer.querySelector('iframe').classList.remove('active');
+    if (actorPlayer) {
+      actorPlayer.pauseVideo();
+    }
+  }
 });
 
 document.querySelector('.close-video').onclick = () => {
-  videoWrapper.classList.remove('active');
-  if (player) player.pauseVideo();
+  headerVideoWrapper.classList.remove('active');
+  actorVideoContainer.querySelector('iframe').classList.remove('active');
+  playpausevideo();
 };
 
 function playpausevideo() {
-  if (player) {
-    const state = player.getPlayerState();
+  if (headerPlayer) {
+    const state = headerPlayer.getPlayerState();
     if (state === YT.PlayerState.PLAYING) {
-      player.pauseVideo();
-      button.innerHTML = "<i class='bx bx-play' ></i>";
+      headerPlayer.pauseVideo();
+      // button.innerHTML = "<i class='bx bx-play' ></i>";
     } else {
-      player.playVideo();
-      button.innerHTML = "<i class='bx bx-pause' ></i>";
+      headerPlayer.playVideo();
+      // button.innerHTML = "<i class='bx bx-pause' ></i>";
+    }
+  }
+  if (actorPlayer) {
+    const state = actorPlayer.getPlayerState();
+    if (state === YT.PlayerState.PLAYING) {
+      actorPlayer.pauseVideo();
+    } else {
+      actorPlayer.playVideo();
     }
   }
 }
