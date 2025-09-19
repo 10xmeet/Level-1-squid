@@ -345,10 +345,12 @@ ul li:last-child {
   visibility: visible;
 }
 
-.video-wrapper video {
-  width: 70%;
-  max-width: 135rem;
-}
+.video-wrapper iframe {
+    width: 80vw;
+    height: 100%;
+    max-width: 135rem;
+    object-fit: cover;
+  }
 
 .video-wrapper .video-control {
   display: flex;
@@ -636,6 +638,13 @@ ul li:last-child {
   width: 100%;
   height: 45.5rem;
   margin: 0 auto 12.6rem;
+}
+
+.actor-video iframe {
+  width: 80vw;
+  height: 100%;
+  max-width: 135rem;
+  object-fit: cover;
 }
 
 .actor-video::before {
