@@ -187,8 +187,9 @@ ul li:last-child {
   z-index: 1;
 }
 
-/* ---------- Secret  ----------
+/* ---------- Secret key ----------
    d2lubmVyOnNxdWlkUGxheWVyNDU2  (base64)
+   ---------- Secret key ----------
 */
 
 .button {
