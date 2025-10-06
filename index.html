@@ -71,7 +71,7 @@
 
       <!------------------- Video ------------------->
       <div class="video-wrapper">
-        <iframe id="header-video" class="video" src="https://www.youtube.com/embed/oqxAJKy0ii4?enablejsapi=1" title="Squid Game Official Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe id="header-video" class="video" src="https://www.youtube.com/embed/oqxAJKy0ii4?enablejsapi=1" title="Squid Game Official Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen alt=""></iframe>
         <div class="close-video">
           <i class="bx bx-x"></i>
         </div>
@@ -354,10 +354,40 @@
           <p>MADE BY FSW CLUB (PARUL UNIVERSITY) </p>
         </div>
       </div>
+      
     </footer>
 
     <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+      // Show a subtle hint to the user after 3 seconds
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          const hint = document.createElement('div');
+          hint.textContent = 'Hint: Sometimes secrets are hidden in the styling...';
+          hint.style.position = 'fixed';
+          hint.style.bottom = '20px';
+          hint.style.left = '50%';
+          hint.style.transform = 'translateX(-50%)';
+          hint.style.background = '#e60065';
+          hint.style.color = '#fff';
+          hint.style.padding = '10px 20px';
+          hint.style.borderRadius = '20px';
+          hint.style.zIndex = '10001';
+          hint.style.fontSize = '14px';
+          document.body.appendChild(hint);
+
+          // Fade out after 6 seconds
+          setTimeout(function () {
+            hint.style.transition = 'opacity 1s';
+            hint.style.opacity = '0';
+            setTimeout(function () {
+              document.body.removeChild(hint);
+            }, 1000);
+          }, 6000);
+        }, 3000);
+      });
+    </script>
   </body>
 </html>
